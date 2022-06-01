@@ -60,34 +60,34 @@ type BasicAuth struct {
 
 // APIKey provides API key based authentication to a request passed via context using ContextAPIKey
 type APIKey struct {
-	Key    string
-	Prefix string
+	Key    string `json:"key"`
+	Prefix string `json:"prefix,omitempty"`
 }
 
 {{#withAWSV4Signature}}
 // AWSv4 provides AWS Signature to a request passed via context using ContextAWSv4
 // https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 type AWSv4 struct {
-	AccessKey string
-	SecretKey string
-	SessionToken string
-	Region string
-	Service string
+	AccessKey string `json:"accessKey"`
+	SecretKey string `json:"secretKey"`
+	SessionToken string `json:"sessionToken"`
+	Region string `json:"region"`
+	Service string `json:"service"`
 }
 
 {{/withAWSV4Signature}}
 // ServerVariable stores the information about a server variable
 type ServerVariable struct {
-	Description  string
-	DefaultValue string
-	EnumValues   []string
+	Description  string `json:"description,omitempty"`
+	DefaultValue string `json:"defaultValue,omitempty"`
+	EnumValues   []string `json:"enumValues"`
 }
 
 // ServerConfiguration stores the information about a server
 type ServerConfiguration struct {
-	URL string
-	Description string
-	Variables map[string]ServerVariable
+	URL string `json:"url"`
+	Description string `json:"description"`
+	Variables map[string]ServerVariable `json:"variables"`
 }
 
 // ServerConfigurations stores multiple ServerConfiguration items
@@ -105,11 +105,11 @@ type Configuration struct {
 	DefaultHeader    map[string]string `json:"defaultHeader,omitempty"`
 	UserAgent        string            `json:"userAgent,omitempty"`
 	Debug            bool              `json:"debug,omitempty"`
-	Servers          ServerConfigurations
-	OperationServers map[string]ServerConfigurations
-	HTTPClient       *http.Client
+	Servers          ServerConfigurations `json:"servers"`
+	OperationServers map[string]ServerConfigurations `json:"operationServers"`
+	HTTPClient       *http.Client      `json:"-"`
     {{#withCustomMiddlewareFunction}}
-	Middleware       MiddlewareFunction
+	Middleware       MiddlewareFunction `json:"-"`
     {{/withCustomMiddlewareFunction}}
 }
 
