@@ -64,22 +64,22 @@ type BasicAuth struct {
 
 // APIKey provides API key based authentication to a request passed via context using ContextAPIKey
 type APIKey struct {
-	Key    string
-	Prefix string
+	Key    string `json:"key"`
+	Prefix string `json:"prefix"`
 }
 
 // ServerVariable stores the information about a server variable
 type ServerVariable struct {
-	Description  string
-	DefaultValue string
-	EnumValues   []string
+	Description  string `json:"description"`
+	DefaultValue string `json:"defaultValue"`
+	EnumValues   []string `json:"enumValues"`
 }
 
 // ServerConfiguration stores the information about a server
 type ServerConfiguration struct {
-	URL string
-	Description string
-	Variables map[string]ServerVariable
+	URL string `json:"url"`
+	Description string `json:"description"`
+	Variables map[string]ServerVariable `json:"variables"`
 }
 
 // ServerConfigurations stores multiple ServerConfiguration items
@@ -92,9 +92,9 @@ type Configuration struct {
 	DefaultHeader    map[string]string `json:"defaultHeader,omitempty"`
 	UserAgent        string            `json:"userAgent,omitempty"`
 	Debug            bool              `json:"debug,omitempty"`
-	Servers          ServerConfigurations
-	OperationServers map[string]ServerConfigurations
-	HTTPClient       *http.Client
+	Servers          ServerConfigurations `json:"servers"`
+	OperationServers map[string]ServerConfigurations `json:"operationServers"`
+	HTTPClient       *http.Client      `json:"-"`
 }
 
 // NewConfiguration returns a new Configuration object

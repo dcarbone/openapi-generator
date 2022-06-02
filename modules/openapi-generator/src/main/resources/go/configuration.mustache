@@ -61,7 +61,7 @@ type BasicAuth struct {
 // APIKey provides API key based authentication to a request passed via context using ContextAPIKey
 type APIKey struct {
 	Key    string `json:"key"`
-	Prefix string `json:"prefix,omitempty"`
+	Prefix string `json:"prefix"`
 }
 
 {{#withAWSV4Signature}}
@@ -78,8 +78,8 @@ type AWSv4 struct {
 {{/withAWSV4Signature}}
 // ServerVariable stores the information about a server variable
 type ServerVariable struct {
-	Description  string `json:"description,omitempty"`
-	DefaultValue string `json:"defaultValue,omitempty"`
+	Description  string `json:"description"`
+	DefaultValue string `json:"defaultValue"`
 	EnumValues   []string `json:"enumValues"`
 }
 
